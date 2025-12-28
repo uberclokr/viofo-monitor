@@ -1,0 +1,70 @@
+#:kivy 2.3.0
+
+<ViofoVideoWidget>:
+    id: video_widget
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MainScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDFloatLayout:
+            # Main Video Surface
+            ViofoVideoWidget:
+                id: video_main
+                source: ""
+                state: "stop"
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+            # Overlay Controls
+            MDIconButton:
+                icon: "menu"
+                user_font_size: "32sp"
+                pos_hint: {"right": 0.98, "top": 0.98}
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 0.8
+                on_release: app.open_menu(self)
+
+            # Camera View Switcher Buttons (Bottom Bar Overlay)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                pos_hint: {"x": 0, "y": 0}
+                size_hint_x: 1
+                size_hint_y: None
+                height: "120dp"
+                padding: 0
+                spacing: 0
+                md_bg_color: 0, 0, 0, 0
+
+                MDFlatButton:
+                    text: "[b]FRONT[/b]" if app.current_stream_index == 0 else "FRONT"
+                    markup: True
+                    size_hint: (1, 1)
+                    font_style: "H6"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    on_release: app.switch_camera(0)
+                
+                MDFlatButton:
+                    text: "[b]INTERIOR[/b]" if app.current_stream_index == 1 else "INTERIOR"
+                    markup: True
+                    size_hint: (1, 1)
+                    font_style: "H6"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    on_release: app.switch_camera(1)
+                
+                MDFlatButton:
+                    text: "[b]REAR[/b]" if app.current_stream_index == 2 else "REAR"
+                    markup: True
+                    size_hint: (1, 1)
+                    font_style: "H6"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    on_release: app.switch_camera(2)
+

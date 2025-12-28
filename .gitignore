@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+
+# Buildozer
+.buildozer/
+bin/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
